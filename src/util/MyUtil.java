@@ -22,7 +22,26 @@ public class MyUtil {
 		String date = simpleDateFormat.format(calendar.getTime());
 		return date;
 	}
-	
+	/**
+	 * 判断输入是否为数字，是转为double并返回，否则返回0
+	 * @param num
+	 * @return
+	 */
+	public static double isnum(String num) {
+		boolean flag =true;
+		for (int i = 0; i < num.length(); i++) {
+			if (!Character.isDigit(num.charAt(i))) {
+				flag = false;
+			}
+		}
+		double temp =0;
+		if (flag) {
+			temp = Double.parseDouble(num);
+		}else{
+			System.out.println("输入有误");
+		}
+		return temp;
+	}
 	
 	
 }

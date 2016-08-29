@@ -14,7 +14,7 @@ import bean.Customer;
  * @date 创建时间：2016年8月28日下午5:22:41
  * @version 1.0
  */
-public class AdmindaoImpl extends BaseDao implements AdminDao {
+public class AdminDaoImpl extends BaseDao implements AdminDao {
 	private ResultSet resultSet;
 	String sql;
 	@Override
@@ -36,15 +36,15 @@ public class AdmindaoImpl extends BaseDao implements AdminDao {
 	public boolean addCustomer(Customer customer) {
 		// TODO Auto-generated method stub
 		boolean flag = false;
-		sql = "insert into CUSTOMER(CUSTNUMBER,CUSTNAME,CUSPWD,CUSTIDCARD,CUSTMONEY,CUSDATE) values(?,?,?,?,?,?)" ;
+		sql = "insert into CUSTOMER(CUSTNUMBER,CUSTNAME,CUSPWD,CUSTIDCARD,CUSTMONEY,CUSDATE) values(?,?,?,?,?,sysdate)" ;
 		flag = executeUpdate(sql,customer.getCustnumber(),customer.getCustname(),
-				customer.getCustpwd(),customer.getCustcard(),customer.getCustmoney(),
-				customer.getCustdate());
+				customer.getCustpwd(),customer.getCustcard(),customer.getCustmoney()
+				);
 		return flag;
 	}
 
 	@Override
-	public Double totalMoney(Customer customer) {
+	public Double totalMoney() {
 		// TODO Auto-generated method stub
 		double totalmoney = 0;
 		boolean flag = false;

@@ -29,7 +29,7 @@ public interface AdminDao  {
 	 * @param administrator
 	 * @return
 	 */
-	public Double totalMoney(Customer customer);
+	public Double totalMoney();
 	/**
 	 * 
 	 * @return

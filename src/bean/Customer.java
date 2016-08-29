@@ -70,4 +70,10 @@ public class Customer implements Serializable{
 	public void setCustdate(Date custdate) {
 		this.custdate = custdate;
 	}
+	@Override
+	public String toString() {
+		String string = "银行账号："+custnumber+ "开户姓名："+custname+"身份证号码："
+	+custcard+"余额："+custmoney+"开户日期："+custdate;
+		return super.toString();
+	}
 }
