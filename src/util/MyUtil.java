@@ -9,6 +9,9 @@ import java.util.Calendar;
  * @version 1.0
  */
 public class MyUtil {
+	public static void main(String[] args) {
+		System.out.println(AutoNumber());
+	}
 	public static String AutoNumber(){
 //		Calendar calendar =Calendar.getInstance();
 //		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yymmddhhmmss");
@@ -18,7 +21,7 @@ public class MyUtil {
 	}
 	public static String getdate(){
 		Calendar calendar =Calendar.getInstance();
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yymmddhhmmss");
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddhhmmss");
 		String date = simpleDateFormat.format(calendar.getTime());
 		return date;
 	}

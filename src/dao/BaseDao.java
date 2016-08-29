@@ -29,11 +29,11 @@ public class BaseDao {
 				if (obj[i] instanceof Integer ) {
 					ps.setInt(i+1, Integer.parseInt(obj[i]+""));
 				}
-				if (obj[i] instanceof String ) {
+				if (obj[i] instanceof Double ) {
 					ps.setDouble(i+1, Double.parseDouble(obj[i]+""));
 				}
 			}
-			ps.executeQuery();
+			rs = ps.executeQuery();
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -55,7 +55,7 @@ public class BaseDao {
 				if (obj[i] instanceof Integer ) {
 					ps.setInt(i+1, Integer.parseInt(obj[i]+""));
 				}
-				if (obj[i] instanceof String ) {
+				if (obj[i] instanceof Double ) {
 					ps.setDouble(i+1, Double.parseDouble(obj[i]+""));
 				}
 			}
