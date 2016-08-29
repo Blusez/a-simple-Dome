@@ -1,6 +1,7 @@
 package dao;
 
 import java.security.interfaces.RSAKey;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -75,7 +76,7 @@ public class AdminDaoImpl extends BaseDao implements AdminDao {
 				customer.setCustpwd(resultSet.getString(3));
 				customer.setCustcard(resultSet.getString(4));
 				customer.setCustmoney(resultSet.getDouble(5));
-				customer.setCustnumber(resultSet.getString(6));
+				customer.setCustdate(resultSet.getDate(6));
 				chart.add(customer);
 			}
 		} catch (SQLException e) {
