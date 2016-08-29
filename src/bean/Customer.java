@@ -17,21 +17,21 @@ public class Customer implements Serializable{
 	private String custname;
 	private String custpwd;
 	private String custcard;
-	private double custmeney;
+	private double custmoney;
 	private Date custdate;
 	
 	
 	public Customer() {
 		super();
 	}
-	public Customer(String custnumber, String custname, String custpwd, String custcard, double custmeney,
+	public Customer(String custnumber, String custname, String custpwd, String custcard, double custmoney,
 			Date custdate) {
 		super();
 		this.custnumber = custnumber;
 		this.custname = custname;
 		this.custpwd = custpwd;
 		this.custcard = custcard;
-		this.custmeney = custmeney;
+		this.custmoney = custmoney;
 		this.custdate = custdate;
 	}
 	public String getCustnumber() {
@@ -58,11 +58,11 @@ public class Customer implements Serializable{
 	public void setCustcard(String custcard) {
 		this.custcard = custcard;
 	}
-	public double getCustmeney() {
-		return custmeney;
+	public double getCustmoney() {
+		return custmoney;
 	}
-	public void setCustmeney(double custmeney) {
-		this.custmeney = custmeney;
+	public void setCustmoney(double custmoney) {
+		this.custmoney = custmoney;
 	}
 	public Date getCustdate() {
 		return custdate;

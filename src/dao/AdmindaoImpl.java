@@ -3,9 +3,11 @@ package dao;
 import java.security.interfaces.RSAKey;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import bean.Administrator;
+import bean.Customer;
 
 /**
  * @author keller
@@ -14,40 +16,73 @@ import bean.Administrator;
  */
 public class AdmindaoImpl extends BaseDao implements AdminDao {
 	private ResultSet resultSet;
+	String sql;
 	@Override
 	public boolean login(Administrator administrator) {
 		boolean flag = false;
-		String sql = "select *from administrator where adminname=? and adminPwd=?";
+		sql = "select *from administrator where adminname=? and adminPwd=?";
 		resultSet = executeQuery(sql, administrator.getAdminName(),administrator.getAdminPwd());
 		try {
 			if (resultSet.next()) {
 				flag = true;
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return flag;
 	}
 
 	@Override
-	public boolean addCustomer(Administrator administrator) {
+	public boolean addCustomer(Customer customer) {
 		// TODO Auto-generated method stub
 		boolean flag = false;
-		String sql = "update administrator set adminPwd=? where adminname = ?";
+		sql = "insert into CUSTOMER(CUSTNUMBER,CUSTNAME,CUSPWD,CUSTIDCARD,CUSTMONEY,CUSDATE) values(?,?,?,?,?,?)" ;
+		flag = executeUpdate(sql,customer.getCustnumber(),customer.getCustname(),
+				customer.getCustpwd(),customer.getCustcard(),customer.getCustmoney(),
+				customer.getCustdate());
 		return flag;
 	}
 
 	@Override
-	public Double totalMoney(Administrator administrator) {
+	public Double totalMoney(Customer customer) {
 		// TODO Auto-generated method stub
-		return null;
+		double totalmoney = 0;
+		boolean flag = false;
+		sql = "select sum(CUSTMONEY) from CUSTOMER";
+		resultSet = executeQuery(sql);
+		try {
+			while(resultSet.next()){
+				totalmoney = resultSet.getDouble(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return totalmoney;
 	}
 
 	@Override
-	public List chart() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Customer> chart() {
+		ArrayList<Customer> chart = new ArrayList<Customer>();
+		sql = "select * from CUSTOMER order by CUSTMONEY desc";
+		resultSet = executeQuery(sql);
+		try {
+			while(resultSet.next()){
+				Customer customer =new Customer();
+				//CUSTNUMBER,CUSTNAME,CUSPWD,CUSTIDCARD,CUSTMONEY,CUSDATE
+				customer.setCustnumber(resultSet.getString(1));
+				customer.setCustname(resultSet.getString(2));
+				customer.setCustpwd(resultSet.getString(3));
+				customer.setCustcard(resultSet.getString(4));
+				customer.setCustmoney(resultSet.getDouble(5));
+				customer.setCustnumber(resultSet.getString(6));
+				chart.add(customer);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return chart;
 	}
 	
 

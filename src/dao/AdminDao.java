@@ -3,6 +3,7 @@ package dao;
 import java.util.List;
 
 import bean.Administrator;
+import bean.Customer;
 
 /**
  * @author keller
@@ -22,16 +23,16 @@ public interface AdminDao  {
 	 * @param administrator
 	 * @return
 	 */
-	public boolean addCustomer(Administrator administrator);
+	public boolean addCustomer(Customer customer);
 	/**
 	 * 
 	 * @param administrator
 	 * @return
 	 */
-	public Double totalMoney(Administrator administrator);
+	public Double totalMoney(Customer customer);
 	/**
 	 * 
 	 * @return
 	 */
-	public List chart();
+	public List<Customer> chart();
 }
