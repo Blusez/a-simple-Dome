@@ -1,10 +1,9 @@
 package dao;
 
-import java.security.interfaces.RSAKey;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import bean.Administrator;
@@ -48,7 +47,6 @@ public class AdminDaoImpl extends BaseDao implements AdminDao {
 	public Double totalMoney() {
 		// TODO Auto-generated method stub
 		double totalmoney = 0;
-		boolean flag = false;
 		sql = "select sum(CUSTMONEY) from CUSTOMER";
 		resultSet = executeQuery(sql);
 		try {
@@ -76,7 +74,7 @@ public class AdminDaoImpl extends BaseDao implements AdminDao {
 				customer.setCustpwd(resultSet.getString(3));
 				customer.setCustcard(resultSet.getString(4));
 				customer.setCustmoney(resultSet.getDouble(5));
-				customer.setCustdate(resultSet.getDate(6));
+				customer.setCustdate((Date)resultSet.getTimestamp(6));
 				chart.add(customer);
 			}
 		} catch (SQLException e) {
@@ -85,9 +83,5 @@ public class AdminDaoImpl extends BaseDao implements AdminDao {
 		}
 		return chart;
 	}
-	
-
-	
-	
 
 }

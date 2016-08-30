@@ -1,13 +1,12 @@
 package util;
 
+import java.io.IOException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.util.Properties;
 
 /**
  * @author keller
@@ -17,14 +16,41 @@ import java.util.Calendar;
 public class DataConnectUtil {
 
 	private static Connection connection;
-	private static final String URL="oracle.jdbc.driver.OracleDriver";
-	private static final String URL1="jdbc:oracle:thin:@localhost:1521:ORCL";
-	private static final String USERNAME="keller";
-	private static final String PASSWORD="123456";
-	public static Connection getConnection(){
+	// private static final String URL="oracle.jdbc.driver.OracleDriver";
+	// private static final String URL1="jdbc:oracle:thin:@localhost:1521:ORCL";
+	// private static final String USERNAME="keller";
+	// private static final String PASSWORD="123456";
+	private static String URL;
+	private static String URL1;
+	private static String USERNAME;
+	private static String PASSWORD;
+	public static void main(String[] args) {
+		getProperties();
+	}
+
+	public static void getProperties() {
+		Properties pro = new Properties();
+
+		String path = "jdbc.properties";
+		try {
+//			pro.load(new InputStreamReader(DataConnectUtil.class.getResourceAsStream(path)));
+			pro.load(DataConnectUtil.class.getResourceAsStream(path));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		URL = pro.getProperty("jdbc.driver");
+		URL1 = pro.getProperty("jdbc.url");
+		USERNAME = pro.getProperty("jdbc.username");
+		PASSWORD = pro.getProperty("jdbc.password");
+
+	}
+
+	public static Connection getConnection() {
+		getProperties();
 		try {
 			Class.forName(URL);
-			connection= DriverManager.getConnection(URL1, USERNAME, PASSWORD);
+			connection = DriverManager.getConnection(URL1, USERNAME, PASSWORD);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -32,25 +58,25 @@ public class DataConnectUtil {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return connection;
 	}
+
 	/**
 	 * 
 	 * @param connection2
 	 * @param statement
 	 * @param resultSet
 	 */
-	public static void closeSource(Connection connection2,
-			PreparedStatement statement, ResultSet resultSet) {
+	public static void closeSource(Connection connection2, PreparedStatement statement, ResultSet resultSet) {
 		try {
-			if (resultSet!=null) {
+			if (resultSet != null) {
 				resultSet.close();
 			}
-			if (statement!=null) {
+			if (statement != null) {
 				statement.close();
 			}
-			if (connection2!=null) {
+			if (connection2 != null) {
 				connection2.close();
 			}
 		} catch (SQLException e) {
@@ -58,7 +84,5 @@ public class DataConnectUtil {
 			e.printStackTrace();
 		}
 	}
-	
-	 
 
 }

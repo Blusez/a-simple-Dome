@@ -21,7 +21,7 @@ public class MyUtil {
 	}
 	public static String getdate(){
 		Calendar calendar =Calendar.getInstance();
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddhhmmss");
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
 		String date = simpleDateFormat.format(calendar.getTime());
 		return date;
 	}
