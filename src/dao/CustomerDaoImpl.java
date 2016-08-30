@@ -66,6 +66,7 @@ public class CustomerDaoImpl extends BaseDao implements CustomerDao {
 		}
 		return blance;
 	}
+
 	public boolean exitsuser(Customer customer) {
 		// TODO Auto-generated method stub
 		boolean flag = false;
@@ -94,7 +95,7 @@ public class CustomerDaoImpl extends BaseDao implements CustomerDao {
 			} else {
 				System.out.println("余额不足！");
 			}
-		}else{
+		} else {
 			System.out.println("用户不存在！");
 		}
 		return flag;
@@ -111,8 +112,8 @@ public class CustomerDaoImpl extends BaseDao implements CustomerDao {
 		flag = executeUpdate(sql, newpwd, customer.getCustname());
 		return flag;
 	}
-//	public boolean confimpwd(){
-//		
-//	}
+	// public boolean confimpwd(){
+	//
+	// }
 
 }

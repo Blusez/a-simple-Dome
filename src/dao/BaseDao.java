@@ -16,19 +16,20 @@ public class BaseDao {
 	private Connection connection;
 	private PreparedStatement ps;
 	private ResultSet rs;
-	public ResultSet executeQuery(String sql,Object...obj){
+
+	public ResultSet executeQuery(String sql, Object... obj) {
 		connection = DataConnectUtil.getConnection();
 		try {
 			ps = connection.prepareStatement(sql);
 			for (int i = 0; i < obj.length; i++) {
-				if (obj[i] instanceof String ) {
-					ps.setString(i+1, String.valueOf(obj[i]));
+				if (obj[i] instanceof String) {
+					ps.setString(i + 1, String.valueOf(obj[i]));
 				}
-				if (obj[i] instanceof Integer ) {
-					ps.setInt(i+1, Integer.parseInt(obj[i]+""));
+				if (obj[i] instanceof Integer) {
+					ps.setInt(i + 1, Integer.parseInt(obj[i] + ""));
 				}
-				if (obj[i] instanceof Double ) {
-					ps.setDouble(i+1, Double.parseDouble(obj[i]+""));
+				if (obj[i] instanceof Double) {
+					ps.setDouble(i + 1, Double.parseDouble(obj[i] + ""));
 				}
 			}
 			rs = ps.executeQuery();
@@ -41,25 +42,27 @@ public class BaseDao {
 		}
 		return rs;
 	}
-	public boolean executeUpdate(String sql,Object...obj){
+
+	public boolean executeUpdate(String sql, Object... obj) {
 		connection = DataConnectUtil.getConnection();
 		boolean flag = false;
 		try {
 			ps = connection.prepareStatement(sql);
 			for (int i = 0; i < obj.length; i++) {
-				if (obj[i] instanceof String ) {
-					ps.setString(i+1, String.valueOf(obj[i]));
+				if (obj[i] instanceof String) {
+					ps.setString(i + 1, String.valueOf(obj[i]));
 				}
-				if (obj[i] instanceof Integer ) {
-					ps.setInt(i+1, Integer.parseInt(obj[i]+""));
+				if (obj[i] instanceof Integer) {
+					ps.setInt(i + 1, Integer.parseInt(obj[i] + ""));
 				}
-				if (obj[i] instanceof Double ) {
-					ps.setDouble(i+1, Double.parseDouble(obj[i]+""));
+				if (obj[i] instanceof Double) {
+					ps.setDouble(i + 1, Double.parseDouble(obj[i] + ""));
 				}
 			}
-			if (ps.executeUpdate() >0) {
+			if (ps.executeUpdate() > 0) {
 				flag = true;
-			};
+			}
+			;
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -69,8 +72,8 @@ public class BaseDao {
 		}
 		return flag;
 	}
-	
-	public void closeResource(){
+
+	public void closeResource() {
 		DataConnectUtil.closeSource(connection, ps, rs);
 	}
 }

@@ -15,11 +15,11 @@ import util.MyUtil;
  */
 public class CustomerService {
 	Customer customer;
-	Scanner  scanner = new Scanner(System.in);
+	Scanner scanner = new Scanner(System.in);
 	CustomerDaoImpl cdi;
+
 	/**
-	 * 菜单
-	 * 对顾客登陆、存款、取款、查询余额、转账、修改密码界面的输入和显示
+	 * 菜单 对顾客登陆、存款、取款、查询余额、转账、修改密码界面的输入和显示
 	 */
 	public void menu() {
 		System.out.println("------------银行系统------------");
@@ -31,8 +31,8 @@ public class CustomerService {
 		System.out.println("    *********6.退       出********     ");
 		System.out.println("-------------------------------");
 		System.out.print("请选择:");
-		String userType=scanner.next();
-		cdi= new CustomerDaoImpl();
+		String userType = scanner.next();
+		cdi = new CustomerDaoImpl();
 		switch (userType) {
 		case "1":
 			depositMoney();
@@ -57,59 +57,77 @@ public class CustomerService {
 			break;
 		}
 		menu();
-		
+
 	}
-	public  void login() {
+	/**
+	 * 用户登录
+	 */
+	public void login() {
 		customer = new Customer();
 		System.out.print("用户名:");
-		customer.setCustname(scanner.next()); 
+		customer.setCustname(scanner.next());
 		System.out.print("密    码:");
 		customer.setCustpwd(scanner.next());
-		cdi= new CustomerDaoImpl();
+		cdi = new CustomerDaoImpl();
 		if (cdi.login(customer)) {
 			System.out.println("登录成功！");
-		}else {
+		} else {
 			System.out.println("用户名或者密码错误！");
 			new Mybank().menu();
 		}
 	}
-	
-	public void depositMoney(){
+	/**
+	 * 存款
+	 */
+	public void depositMoney() {
 		System.out.print("请输入存入金额:");
-		String num=scanner.next();
+		String num = scanner.next();
 		if (cdi.depositMoney(customer, MyUtil.isnum(num))) {
 			System.out.println("存款成功！");
-		}else{
-//			System.out.println();
-		};
+		} else {
+			// System.out.println();
+		}
+		;
 	}
-	public void drawMoney(){
+	/**
+	 * 取款
+	 */
+	public void drawMoney() {
 		System.out.print("请输入取款金额:");
-		String num=scanner.next();
+		String num = scanner.next();
 		if (cdi.drawMoney(customer, MyUtil.isnum(num))) {
 			System.out.println("取款成功！");
 		}
 	}
-	public void checkblance(){
-		System.out.println("您的余额为："+cdi.blance(customer));
+	/**
+	 * chaxunyue
+	 */
+	public void checkblance() {
+		System.out.println("您的余额为：" + cdi.blance(customer));
 	}
-	public void transferAccount(){
+	/**
+	 * 转账
+	 */
+	public void transferAccount() {
 		Customer customer1 = new Customer();
 		System.out.print("请输入转账用户名:");
 		customer1.setCustname(scanner.next());
 		System.out.print("请输入取款金额:");
-		String num=scanner.next();
+		String num = scanner.next();
 		if (cdi.transferAccount(customer, customer1, MyUtil.isnum(num))) {
 			System.out.println("转账成功");
-		}else {
+		} else {
 			System.out.println("转账失败！");
 		}
 	}
-	public void changePwd(){
+	/**
+	 * 修改密码
+	 */
+	public void changePwd() {
 		System.out.print("请输入原始的密码:");
 		customer.setCustpwd(scanner.next());
 		if (cdi.login(customer)) {
-			boolean flag =true;
+			boolean flag = true;
 			while (flag) {
 				System.out.print("请输入新的密码:");
 				String newpwd1 = scanner.next();
@@ -118,17 +136,15 @@ public class CustomerService {
 				if (newpwd.equals(newpwd1)) {
 					if (cdi.changePwd(customer, newpwd)) {
 						System.out.println("修改密码成功！");
-						flag =false;
-					}else {
+						flag = false;
+					} else {
 						System.out.println("两次密码不一致！请重新输入！");
 					}
 				}
 			}
-		}else {
+		} else {
 			System.out.println("密码不正确！");
 		}
 	}
-	
-	
 
 }

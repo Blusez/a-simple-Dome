@@ -17,11 +17,12 @@ import bean.Customer;
 public class AdminDaoImpl extends BaseDao implements AdminDao {
 	private ResultSet resultSet;
 	String sql;
+
 	@Override
 	public boolean login(Administrator administrator) {
 		boolean flag = false;
 		sql = "select *from administrator where adminname=? and adminPwd=?";
-		resultSet = executeQuery(sql, administrator.getAdminName(),administrator.getAdminPwd());
+		resultSet = executeQuery(sql, administrator.getAdminName(), administrator.getAdminPwd());
 		try {
 			if (resultSet.next()) {
 				flag = true;
@@ -36,10 +37,9 @@ public class AdminDaoImpl extends BaseDao implements AdminDao {
 	public boolean addCustomer(Customer customer) {
 		// TODO Auto-generated method stub
 		boolean flag = false;
-		sql = "insert into CUSTOMER(CUSTNUMBER,CUSTNAME,CUSPWD,CUSTIDCARD,CUSTMONEY,CUSDATE) values(?,?,?,?,?,sysdate)" ;
-		flag = executeUpdate(sql,customer.getCustnumber(),customer.getCustname(),
-				customer.getCustpwd(),customer.getCustcard(),customer.getCustmoney()
-				);
+		sql = "insert into CUSTOMER(CUSTNUMBER,CUSTNAME,CUSPWD,CUSTIDCARD,CUSTMONEY,CUSDATE) values(?,?,?,?,?,sysdate)";
+		flag = executeUpdate(sql, customer.getCustnumber(), customer.getCustname(), customer.getCustpwd(),
+				customer.getCustcard(), customer.getCustmoney());
 		return flag;
 	}
 
@@ -50,7 +50,7 @@ public class AdminDaoImpl extends BaseDao implements AdminDao {
 		sql = "select sum(CUSTMONEY) from CUSTOMER";
 		resultSet = executeQuery(sql);
 		try {
-			while(resultSet.next()){
+			while (resultSet.next()) {
 				totalmoney = resultSet.getDouble(1);
 			}
 		} catch (SQLException e) {
@@ -66,15 +66,15 @@ public class AdminDaoImpl extends BaseDao implements AdminDao {
 		sql = "select * from CUSTOMER order by CUSTMONEY desc";
 		resultSet = executeQuery(sql);
 		try {
-			while(resultSet.next()){
-				Customer customer =new Customer();
-				//CUSTNUMBER,CUSTNAME,CUSPWD,CUSTIDCARD,CUSTMONEY,CUSDATE
+			while (resultSet.next()) {
+				Customer customer = new Customer();
+				// CUSTNUMBER,CUSTNAME,CUSPWD,CUSTIDCARD,CUSTMONEY,CUSDATE
 				customer.setCustnumber(resultSet.getString(1));
 				customer.setCustname(resultSet.getString(2));
 				customer.setCustpwd(resultSet.getString(3));
 				customer.setCustcard(resultSet.getString(4));
 				customer.setCustmoney(resultSet.getDouble(5));
-				customer.setCustdate((Date)resultSet.getTimestamp(6));
+				customer.setCustdate((Date) resultSet.getTimestamp(6));
 				chart.add(customer);
 			}
 		} catch (SQLException e) {

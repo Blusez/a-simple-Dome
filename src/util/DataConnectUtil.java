@@ -24,16 +24,20 @@ public class DataConnectUtil {
 	private static String URL1;
 	private static String USERNAME;
 	private static String PASSWORD;
+
 	public static void main(String[] args) {
 		getProperties();
 	}
-
+	/**
+	 * 读取就properties文件中的数据
+	 */
 	public static void getProperties() {
 		Properties pro = new Properties();
 
 		String path = "jdbc.properties";
 		try {
-//			pro.load(new InputStreamReader(DataConnectUtil.class.getResourceAsStream(path)));
+			// pro.load(new
+			// InputStreamReader(DataConnectUtil.class.getResourceAsStream(path)));
 			pro.load(DataConnectUtil.class.getResourceAsStream(path));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -45,7 +49,10 @@ public class DataConnectUtil {
 		PASSWORD = pro.getProperty("jdbc.password");
 
 	}
-
+	/**
+	 * 获得jdbc链接
+	 * @return
+	 */
 	public static Connection getConnection() {
 		getProperties();
 		try {
@@ -63,7 +70,7 @@ public class DataConnectUtil {
 	}
 
 	/**
-	 * 
+	 * 关闭jdbc资源
 	 * @param connection2
 	 * @param statement
 	 * @param resultSet

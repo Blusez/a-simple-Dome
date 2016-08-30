@@ -11,6 +11,7 @@ import dao.BaseDao;
  */
 public class Mybank {
 	Scanner scanner = new Scanner(System.in);
+
 	/**
 	 * 银行系统主菜单方法
 	 */
@@ -21,15 +22,15 @@ public class Mybank {
 		System.out.println("    *********3.退    出********     ");
 		System.out.println("-------------------------------");
 		System.out.print("请选择:");
-		String userType=scanner.next();
+		String userType = scanner.next();
 		switch (userType) {
 		case "1":
-			AdminService adminService =new AdminService();
+			AdminService adminService = new AdminService();
 			adminService.login();
 			adminService.menu();
 			break;
 		case "2":
-			CustomerService customerService = new CustomerService(); 
+			CustomerService customerService = new CustomerService();
 			customerService.login();
 			customerService.menu();
 			break;
