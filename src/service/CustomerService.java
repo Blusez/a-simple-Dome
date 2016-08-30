@@ -2,9 +2,7 @@ package service;
 
 import java.util.Scanner;
 
-import bean.Administrator;
 import bean.Customer;
-import dao.AdminDaoImpl;
 import dao.CustomerDaoImpl;
 import util.MyUtil;
 
