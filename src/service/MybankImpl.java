@@ -9,7 +9,7 @@ import dao.BaseDao;
  * @date 创建时间：2016年8月29日下午6:48:08
  * @version 1.0
  */
-public class Mybank {
+public class MybankImpl implements MyBank{
 	Scanner scanner = new Scanner(System.in);
 
 	/**
@@ -25,12 +25,12 @@ public class Mybank {
 		String userType = scanner.next();
 		switch (userType) {
 		case "1":
-			AdminService adminService = new AdminService();
+			AdminServiceImpl adminService = new AdminServiceImpl();
 			adminService.login();
 			adminService.menu();
 			break;
 		case "2":
-			CustomerService customerService = new CustomerService();
+			CustomerServiceImpl customerService = new CustomerServiceImpl();
 			customerService.login();
 			customerService.menu();
 			break;

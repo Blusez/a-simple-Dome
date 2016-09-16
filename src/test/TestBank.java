@@ -1,6 +1,6 @@
 package test;
 
-import service.Mybank;
+import service.MybankImpl;
 
 /**
  * @author keller
@@ -11,7 +11,7 @@ public class TestBank {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		new Mybank().menu();
+		new MybankImpl().menu();
 	}
 
 }

@@ -1,7 +1,9 @@
 package util;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * @author keller
@@ -53,6 +55,12 @@ public class MyUtil {
 			System.out.println("输入有误");
 		}
 		return temp;
+	}
+	
+	public static String dateformat(Date date){
+		DateFormat sdf = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
+		return sdf.format(date);
+		
 	}
 
 }

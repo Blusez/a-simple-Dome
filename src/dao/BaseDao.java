@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 
 import util.DataConnectUtil;
 
@@ -57,6 +58,9 @@ public class BaseDao {
 				}
 				if (obj[i] instanceof Double) {
 					ps.setDouble(i + 1, Double.parseDouble(obj[i] + ""));
+				}
+				if (obj[i] instanceof Date) {
+					ps.setObject(i + 1,new java.sql.Timestamp(((Date)obj[i]).getTime()));
 				}
 			}
 			if (ps.executeUpdate() > 0) {

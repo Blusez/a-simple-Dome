@@ -22,7 +22,7 @@ public class AdminDaoImpl extends BaseDao implements AdminDao {
 	public boolean login(Administrator administrator) {
 		boolean flag = false;
 		sql = "select *from administrator where adminname=? and adminPwd=?";
-		resultSet = executeQuery(sql, administrator.getAdminName(), administrator.getAdminPwd());
+		resultSet = super.executeQuery(sql, administrator.getAdminName(), administrator.getAdminPwd());
 		try {
 			if (resultSet.next()) {
 				flag = true;
@@ -36,10 +36,10 @@ public class AdminDaoImpl extends BaseDao implements AdminDao {
 	@Override
 	public boolean addCustomer(Customer customer) {
 		// TODO Auto-generated method stub
-		boolean flag = false;
-		sql = "insert into CUSTOMER(CUSTNUMBER,CUSTNAME,CUSPWD,CUSTIDCARD,CUSTMONEY,CUSDATE) values(?,?,?,?,?,sysdate)";
+		boolean flag ;
+		sql = "insert into CUSTOMER(CUSTNUMBER,CUSTNAME,CUSPWD,CUSTIDCARD,CUSTMONEY,CUSDATE) values(?,?,?,?,?,?)";
 		flag = executeUpdate(sql, customer.getCustnumber(), customer.getCustname(), customer.getCustpwd(),
-				customer.getCustcard(), customer.getCustmoney());
+				customer.getCustcard(), customer.getCustmoney(),new Date());
 		return flag;
 	}
 
@@ -74,7 +74,7 @@ public class AdminDaoImpl extends BaseDao implements AdminDao {
 				customer.setCustpwd(resultSet.getString(3));
 				customer.setCustcard(resultSet.getString(4));
 				customer.setCustmoney(resultSet.getDouble(5));
-				customer.setCustdate((Date) resultSet.getTimestamp(6));
+				customer.setCustdate( resultSet.getTimestamp(6));
 				chart.add(customer);
 			}
 		} catch (SQLException e) {
